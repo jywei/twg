@@ -10,8 +10,6 @@ import (
 	"github.com/jywei/twg/example"
 )
 
-var file string = "this is not used"
-
 func Example_crop() {
 	var r io.Reader
 	img, err := example.Decode(r)
