@@ -2,6 +2,7 @@ package underscore
 
 import "testing"
 
+// Using table driven tests
 func TestCamel(t *testing.T) {
 	testCases := []struct {
 		arg  string
@@ -12,6 +13,7 @@ func TestCamel(t *testing.T) {
 		{"endsWithA", "ends_with_a"},
 	}
 	for _, tc := range testCases {
+		t.Logf("Testing: %q", tc.arg)
 		got := Camel(tc.arg)
 		if got != tc.want {
 			t.Errorf("Camel(%q) = %q; want %q", tc.arg, got, tc.want)
