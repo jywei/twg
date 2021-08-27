@@ -24,6 +24,7 @@ func TestA3(t *testing.T) {
 	time.Sleep(time.Second)
 }
 
+// Subtest can also be run in parallel with other subtests
 func TestB(t *testing.T) {
 	fmt.Println("setup")
 	defer fmt.Println("deferred teardown")
