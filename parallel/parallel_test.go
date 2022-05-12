@@ -56,6 +56,7 @@ func TestGotcha(t *testing.T) {
 	}
 	for _, tc := range testCases {
 		tc := tc // copy value for parallel tests - do not delete this!
+		// need to go before t.Parallel()
 		t.Run(fmt.Sprintf("arg=%d", tc.arg), func(t *testing.T) {
 			t.Parallel()
 			t.Logf("Testing with: arg=%d, want=%d", tc.arg, tc.want)
