@@ -83,7 +83,7 @@ func testUserStore_Find(us *UserStore) func(t *testing.T) {
 	return func(t *testing.T) {
 		roy := &User{
 			Name:  "Roy Wei",
-			Email: "roy@wei.com",
+			Email: "roywjy@gmail.com",
 		}
 		err := us.Create(roy)
 		if err != nil {
