@@ -28,7 +28,7 @@ func run(m *testing.M) int {
 											 );`
 	)
 
-	psql, err := sql.Open("postgres", "host=localhost port=5432 user=jon sslmode=disable")
+	psql, err := sql.Open("postgres", "host=localhost port=5432 user=roy sslmode=disable")
 	if err != nil {
 		panic(fmt.Errorf("sql.Open() err = %s", err))
 	}
@@ -50,7 +50,7 @@ func run(m *testing.M) int {
 		}
 	}()
 
-	db, err := sql.Open("postgres", "host=localhost port=5432 user=jon sslmode=disable dbname=test_user_store")
+	db, err := sql.Open("postgres", "host=localhost port=5432 user=roy sslmode=disable dbname=test_user_store")
 	if err != nil {
 		panic(fmt.Errorf("sql.Open() err = %s", err))
 	}
@@ -79,7 +79,7 @@ func (rus *racyUserStore) Find(id int) (*User, error) {
 }
 
 func TestSpend_race(t *testing.T) {
-	db, err := sql.Open("postgres", "host=localhost port=5432 user=jon sslmode=disable dbname=test_user_store")
+	db, err := sql.Open("postgres", "host=localhost port=5432 user=roy sslmode=disable dbname=test_user_store")
 	if err != nil {
 		panic(fmt.Errorf("sql.Open() err = %s", err))
 	}
@@ -87,17 +87,17 @@ func TestSpend_race(t *testing.T) {
 	us := &UserStore{
 		sql: db,
 	}
-	jon := &User{
-		Name:    "Jon Calhoun",
-		Email:   "jon@calhoun.io",
+	roy := &User{
+		Name:    "roy Calhoun",
+		Email:   "roy@calhoun.io",
 		Balance: 100,
 	}
-	err = us.Create(jon)
+	err = us.Create(roy)
 	if err != nil {
 		t.Errorf("us.Create() err = %s", err)
 	}
 	defer func() {
-		err := us.Delete(jon.ID)
+		err := us.Delete(roy.ID)
 		if err != nil {
 			t.Errorf("us.Delete() err = %s", err)
 		}
@@ -112,7 +112,7 @@ func TestSpend_race(t *testing.T) {
 	for i := 0; i < 2; i++ {
 		spendWg.Add(1)
 		go func() {
-			err := Spend(rus, jon.ID, 25)
+			err := Spend(rus, roy.ID, 25)
 			if err != nil {
 				t.Fatalf("Spend() err = %s", err)
 			}
@@ -120,7 +120,7 @@ func TestSpend_race(t *testing.T) {
 		}()
 	}
 	spendWg.Wait()
-	got, err := us.Find(jon.ID)
+	got, err := us.Find(roy.ID)
 	if err != nil {
 		t.Fatalf("us.Find() err = %s", err)
 	}

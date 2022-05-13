@@ -10,7 +10,7 @@ func ExampleHello() {
 	fmt.Println(greeting)
 
 	// Output:
-	// Hello, Jon
+	// Hello, Roy
 }
 
 func ExamplePage() {
