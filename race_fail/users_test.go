@@ -88,8 +88,8 @@ func TestSpend_race(t *testing.T) {
 		sql: db,
 	}
 	roy := &User{
-		Name:    "roy Calhoun",
-		Email:   "roy@calhoun.io",
+		Name:    "Roy Wei",
+		Email:   "roywjy@gmail.com",
 		Balance: 100,
 	}
 	err = us.Create(roy)
